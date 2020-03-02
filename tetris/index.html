@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Tetris</title>
+    <meta property="og:title" content="JavaScript Tetris" />
+    <link 
+    href="https://fonts.googleapis.com/css?family=Press+Start+2P" 
+    rel="stylesheet"
+    />
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body>
+    <div class="grid">
+        <canvas id="board" class="game-board"></canvas>
+        <div class="right-column">
+            <div>
+                <h1>TETRIS</h1>
+                <p>Score : <span id="score">0</span></p>
+                <p>Lines : <span id="lines">0</span></p>
+                <p>Level : <span id="level">0</span></p>
+            </div>
+            <button id="play" class="play-button">Play</button>
+        </div>
+    </div>
+    <!--불러오는 순서에 주의, 스크립트 호출은 가장 마지막에 호출할 것-->
+    <script type="text/javascript" src="constants.js"></script>
+    <script type="text/javascript" src="board.js"></script>
+    <script type="text/javascript" src="piece.js"></script>
+    <script type="text/javascript" src="main.js"></script>
+</body>    
+</html>
