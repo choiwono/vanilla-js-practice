@@ -4,6 +4,8 @@ class Piece {
     color;
     shape;
     ctx;
+    typeId;
+    hardDropped;
 
     constructor(ctx) {
         this.ctx = ctx;
@@ -11,18 +13,12 @@ class Piece {
     }
 
     spawn() {
-        this.color = 'blue';
-        // 테트리스의 모양 때문에 3x3 ( 회전까지 생각해야함 )
-        
-        this.shape = [
-            [2, 0, 0],
-            [2, 2, 2],
-            [0, 0, 0]
-        ];
-
-        // Starting position;
-        this.x = 3;
+        this.typeId = this.randomizeTetrominoType(COLORS.length - 1);
+        this.shape = SHAPES[this.typeId];
+        this.color = COLORS[this.typeId];
+        this.x = 0;
         this.y = 0;
+        this.hardDropped = false;
     }
 
     draw() {
@@ -43,5 +39,18 @@ class Piece {
     move(p) {
         this.x = p.x;
         this.y = p.y;
+        this.shape = p.shape;
+    }
+
+    hardDrop(){
+        this.hardDropped = true;
+    }
+
+    setStartingPosition(){
+        this.x = this.typeId === 4 ? 4 : 3;
+    }
+
+    randomizeTetrominoType(noOfType) {
+        return Math.floor(Math.random() * noOfType + 1);
     }
 }
