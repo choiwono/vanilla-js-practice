@@ -113,32 +113,27 @@ class Board {
 
             // If every value is greater than 0.
             if (row.every(value => value > 0)) {
-            lines++;
+                lines++;
 
-            // Remove the row.
-            this.grid.splice(y, 1);
+                // Remove the row.
+                this.grid.splice(y, 1);
 
-            // Add zero filled row at the top.
-            this.grid.unshift(Array(COLS).fill(0));
+                // Add zero filled row at the top.
+                this.grid.unshift(Array(COLS).fill(0));
             }
         });
         
         if (lines > 0) {
-            // Calculate points from cleared lines and level.
+                // Calculate points from cleared lines and level.
+                account.score += this.getLinesClearedPoints(lines);
+                account.lines += lines;
 
-            account.score += this.getLinesClearedPoints(lines);
-            account.lines += lines;
-
-            // If we have reached the lines for next level
-            if (account.lines >= LINES_PER_LEVEL) {
-            // Goto next level
-            account.level++;  
-            
-            // Remove lines so we start working for the next level
-            account.lines -= LINES_PER_LEVEL;
-
-            // Increase speed of game
-            time.level = LEVEL[account.level];
+                // If we have reached the lines for next level
+                if (account.lines >= LINES_PER_LEVEL) {
+                
+                account.level++;  
+                account.lines -= LINES_PER_LEVEL;
+                time.level = LEVEL[account.level];
             }
         }
     }
@@ -150,15 +145,12 @@ class Board {
             // Transpose matrix
             for (let y = 0; y < p.shape.length; ++y) {
                 for (let x = 0; x < y; ++x) {
-                [p.shape[x][y], p.shape[y][x]] = [p.shape[y][x], p.shape[x][y]];
+                  [p.shape[x][y], p.shape[y][x]] = 
+                  [p.shape[y][x], p.shape[x][y]];
                 }
             }
-            // Reverse the order of the columns.
-            if(direction === ROTATION.RIGHT) {
-                p.shape.forEach(row => row.reverse());
-            } else if (direction === ROTATION.LEFT) {
-                p.shape.reverse();
-            }
+            
+            p.shape.forEach(row => row.reverse());
         }
         
         return p;
